@@ -3,3 +3,6 @@ contact_links:
   - name: Help and Support
     url: https://discourse.threejs.org/
     about: Please use the forum if you have questions or need help.
+
+exclude:
+  - "assets/css/*.scss"
