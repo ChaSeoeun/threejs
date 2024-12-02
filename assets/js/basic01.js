@@ -1,5 +1,5 @@
 // three.js 라이브러리를 '/three.js-master/build/three.module.js' 경로에서 가져오기
-import * as THREE from '/assets/js/three.js-master/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
 
 // App 클래스 생성 (3D 애플리케이션의 구조 설정용)
 class App {
