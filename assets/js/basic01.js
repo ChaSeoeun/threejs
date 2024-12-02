@@ -1,4 +1,5 @@
 // three.js 라이브러리를 '/three.js-master/build/three.module.js' 경로에서 가져오기
+// 경로 연결 안 돼서 그냥 cdn 가져다 붙임 ㅠ
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
 
 // App 클래스 생성 (3D 애플리케이션의 구조 설정용)
