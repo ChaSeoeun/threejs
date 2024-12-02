@@ -37,7 +37,7 @@ class App {
         // 컨테이너의 너비와 높이
         const width = this._divContainer.clientWidth;
         const height = this._divContainer.clientHeight;
-        
+
         // 원근 카메라를 생성
         const camera = new THREE.PerspectiveCamera(
             75,              // 시야각(FOV): 카메라가 보는 장면의 세로 각도 (75도)
@@ -45,10 +45,10 @@ class App {
             0.1,             // near clipping plane: 이 거리보다 가까운 객체는 렌더링되지 않음
             100              // far clipping plane: 이 거리보다 먼 객체는 렌더링되지 않음
         );
-        
+
         // 카메라의 위치를 설정합니다. z축 방향으로 2만큼 떨어져 위치
         camera.position.z = 2;
-        
+
         // 생성된 카메라를 클래스의 속성으로 저장하여 다른 메서드에서도 접근
         this._camera = camera;
     }
@@ -59,10 +59,10 @@ class App {
         const intensity = 1;             // 빛의 강도 설정 (1은 기본 강도)
         // THREE.DirectionalLight 태양과 같이 한 방향에서 특정한 방향으로 빛을 비추는 조명
         const light = new THREE.DirectionalLight(color, intensity);
-        
+
         // 빛의 위치를 설정. x, y, z 축에 따라 방향을 지정합니다.
         light.position.set(-1, 2, 4);
-    
+
         // 생성한 빛을 씬에 추가하여 적용
         this._scene.add(light);
     }
@@ -71,16 +71,16 @@ class App {
     _setupModel() {
         // 큐브의 모양을 정의하는 형상(geometry) 설정
         const geometry = new THREE.BoxGeometry(1, 1, 1);
-    
+
         // 큐브의 재질(material) 설정, 색상 지정
         const material = new THREE.MeshPhongMaterial({ color: 0xc72268 });
-    
+
         // 형상과 재질을 결합하여 최종적으로 씬에 렌더링할 실제 3D 객체(mesh) 생성
         const cube = new THREE.Mesh(geometry, material);
-    
+
         // 생성된 큐브를 씬(scene)에 추가하여 화면에 보이도록 설정
         this._scene.add(cube);
-    
+
         // 나중에 접근할 수 있도록 this._cube에 큐브 저장
         this._cube = cube;
     }
@@ -96,17 +96,35 @@ class App {
         this._camera.updateProjectionMatrix();
     }
 
-    // 렌더링 함수
+    // 렌더링 및 업데이트를 관리하는 클래스 내 함수
     render(time) {
-        // 씬을 카메라 시점으로 렌더링
+        // 씬(Scene)을 카메라(Camera)의 시점으로 렌더링
+        // - this._renderer: WebGLRenderer 인스턴스, Three.js의 렌더링 엔진
+        // - this._scene: 3D 오브젝트들이 배치된 씬(Scene) 객체
+        // - this._camera: 씬을 관찰하는 시점 역할을 하는 카메라 객체
         this._renderer.render(this._scene, this._camera);
+
+        // 업데이트 함수 호출
+        // - time: 브라우저의 requestAnimationFrame에서 전달하는 현재 시간 (밀리초 단위)
         this.update(time);
-        requestAnimationFrame(this.render.bind(this)); // 다음 프레임을 렌더링하도록 설정
+
+        // requestAnimationFrame을 사용해 다음 프레임을 예약
+        // - render.bind(this): 현재 클래스 컨텍스트(this)를 유지하도록 bind 처리
+        // - requestAnimationFrame은 화면의 새로고침 속도에 맞춰 호출
+        requestAnimationFrame(this.render.bind(this));
     }
 
     update(time) {
+        // 시간 값 변환 (밀리초 단위를 초 단위로 변환)
+        // - time은 밀리초 단위로 전달되므로 0.001을 곱해 초 단위로 변경
         time *= 0.001;
+
+        // 큐브 오브젝트(this._cube)의 X축 회전값 업데이트
+        // - 시간이 지남에 따라 X축으로 회전
         this._cube.rotation.x = time;
+
+        // 큐브 오브젝트(this._cube)의 Y축 회전값 업데이트
+        // - 시간이 지남에 따라 Y축으로 회전
         this._cube.rotation.y = time;
     }
 }
