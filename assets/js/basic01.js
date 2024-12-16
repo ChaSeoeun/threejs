@@ -69,7 +69,7 @@ class App {
 
     // 모델 설정 함수 
     _setupModel() {
-        // 큐브의 모양을 정의하는 형상(geometry) 설정
+        // 큐브의 모양을 정의하는 형상(geometry) 설정(width(x), height(y), depth(z=깊이))
         const geometry = new THREE.BoxGeometry(1, 1, 1);
 
         // 큐브의 재질(material) 설정, 색상 지정
