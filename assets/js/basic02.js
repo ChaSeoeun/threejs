@@ -58,7 +58,7 @@ class App {
     // 조명 설정 함수
     _setupLight() {
         const color = 0xffffff;          // 빛의 색상 설정 (흰색)
-        const intensity = 1;             // 빛의 강도 설정 (1은 기본 강도)
+        const intensity = 2;             // 빛의 강도 설정 (1은 기본 강도)
         // THREE.DirectionalLight 태양과 같이 한 방향에서 특정한 방향으로 빛을 비추는 조명
         const light = new THREE.DirectionalLight(color, intensity);
 
@@ -85,7 +85,7 @@ class App {
         // 가로, 세로, 깊이세그먼트를 2로 설정하여 각 면을 2X2 격자로 나눔
     
         // 2. 채우기 재질 생성
-        const fillMasterial = new THREE.MeshPhongMaterial({color: 0X515151}); 
+        const fillMasterial = new THREE.MeshPhongMaterial({color: 0X515151, emissive: 0x333333}); 
         // - MeshPhongMaterial: 광원을 받는 재질로, 반짝임과 입체감을 표현 가능
     
         // 3. 큐브 메쉬 생성 (기하학 + 재질)
@@ -160,6 +160,8 @@ class App {
         // 큐브 오브젝트(this._cube)의 Y축 회전값 업데이트
         // - 시간이 지남에 따라 Y축으로 회전
         //this._cube.rotation.y = time;
+
+        
     }
 }
 
