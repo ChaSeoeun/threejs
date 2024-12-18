@@ -87,6 +87,7 @@ class App {
         // 2. 채우기 재질 생성
         const fillMasterial = new THREE.MeshPhongMaterial({color: 0X515151, emissive: 0x333333}); 
         // - MeshPhongMaterial: 광원을 받는 재질로, 반짝임과 입체감을 표현 가능
+        // - emissive: 빛나는 효과
     
         // 3. 큐브 메쉬 생성 (기하학 + 재질)
         const cube = new THREE.Mesh(geometry, fillMasterial); 
